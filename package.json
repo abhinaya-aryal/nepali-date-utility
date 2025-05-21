@@ -48,7 +48,7 @@
   "author": "Abhinaya Aryal",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abhinaya-aryal/nepali-date-utility.git"
+    "url": "git+https://github.com/abhinaya-aryal/nepali-date-utility.git"
   },
   "homepage": "https://github.com/abhinaya-aryal/nepali-date-utility#readme",
   "bugs": {
