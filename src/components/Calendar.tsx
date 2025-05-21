@@ -13,7 +13,7 @@ import {
 } from "../data/bs-calendar";
 import MonthNavigation from "./MonthNavigation";
 
-export const Calendar: React.FC<CalendarProps & { locale?: "en" | "ne" }> = ({
+export const Calendar: React.FC<CalendarProps> = ({
   locale = "en",
   selectedDate,
   viewDate,
@@ -148,4 +148,3 @@ function toNepaliDigits(num: number): string {
 }
 
 export default Calendar;
-

@@ -1,37 +1,38 @@
-# Nepali DatePicker
+# 🌸 Nepali DatePicker
 
-A beautiful and customizable React date picker component for the Nepali Bikram Sambat calendar system.
+A beautiful and customizable React date picker component along with other utilities for the Nepali Bikram Sambat calendar system.
 
-## Features
+> ✨ [Live Demo »](https://date.aryalabhinaya.com.np)
 
-- Modern, clean UI with Tailwind CSS styling
-- Full support for Bikram Sambat (BS) calendar
-- Conversion utilities between BS and Gregorian dates
-- Localization support (English and Nepali)
-- Highly customizable theming
-- Responsive design
-- Accessibility features
-- Comprehensive API
+## ✨ Features
 
-## Installation
+- 🌿 Modern, clean UI with Tailwind CSS
+- 📅 Full support for the Bikram Sambat calendar
+- 🔁 Seamless BS ↔ AD conversion utilities
+- 🌐 Localization (English + Nepali)
+- 🎨 Highly customizable theming
+- 📱 Responsive and accessible design
+- 🧠 Simple and powerful API
+
+## 📦 Installation
 
 ```bash
 npm install nepali-date-utlity
 ```
 
-## Usage
+## 🚀 Usage
 
-```jsx
-import React, { useState } from 'react';
-import { NepaliDatePicker, NepaliDate } from 'nepali-date-utility';
-import 'nepali-date-utility/styles.css'; // Optional: Import default styles
+```tsx
+import React, { useState } from "react";
+import { NepaliDatePicker, NepaliDate } from "nepali-date-utility";
+import "nepali-date-utility/styles.css";
 
 function App() {
   const [selectedDate, setSelectedDate] = useState<NepaliDate | null>(null);
 
   const handleDateChange = (date: NepaliDate) => {
     setSelectedDate(date);
-    console.log('Selected date:', date);
+    console.log("Selected date:", date);
   };
 
   return (
@@ -56,7 +57,7 @@ function App() {
 export default App;
 ```
 
-## API Reference
+## 🧾 API Reference
 
 ### NepaliDatePicker Props
 
@@ -74,7 +75,7 @@ export default App;
 | `calendarClassName` | `string`                      | `""`                       | Additional class name for calendar popup |
 | `position`          | `"bottom" \| "top" \| "auto"` | `"bottom"`                 | Position of the calendar popup           |
 
-### Type Definitions
+### 🧱 Type Definitions
 
 ```typescript
 interface NepaliDate {
@@ -96,7 +97,7 @@ interface NepaliDateFormatOptions {
 }
 ```
 
-### Utility Functions
+### 🔧 Utility Functions
 
 - `convertADToBS(adDate: Date): NepaliDate` - Convert AD date to BS date
 - `convertBSToAD(bsDate: NepaliDate): GregorianDate` - Convert BS date to AD date
@@ -105,7 +106,7 @@ interface NepaliDateFormatOptions {
 - `parseBSDate(dateStr: string, format?: string): NepaliDate | null` - Parse string to BS date
 - `isValidBsDate(date: NepaliDate): boolean` - Check if BS date is valid
 
-## Customization
+## 🎨 Customization Examples
 
 You can customize the appearance using Tailwind classes:
 
@@ -117,7 +118,33 @@ You can customize the appearance using Tailwind classes:
 />
 ```
 
-## License
+```jsx
+<NepaliDatePicker
+  value={null}
+  minDate={{ year: 2080, month: 1, day: 1 }}
+  maxDate={{ year: 2080, month: 12, day: 30 }}
+  placeholder="2080 BS only"
+/>
+```
 
-MIT
+```jsx
+<NepaliDatePicker value={null} disabled={true} placeholder="This is disabled" />
+```
 
+```jsx
+<NepaliDatePicker
+  value={null}
+  position="top"
+  placeholder="Calendar opens above"
+/>
+```
+
+## 🌐 Demo
+
+> 📍 **Live Preview**: [https://date.aryalabhinaya.com.np](https://date.aryalabhinaya.com.np)
+
+Explore the component’s features interactively.
+
+## 📄 License
+
+[MIT](./LICENSE)
