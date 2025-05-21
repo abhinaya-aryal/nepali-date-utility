@@ -1,3 +1,5 @@
+import "./index.css";
+
 // Type exports
 export type { NepaliDate, GregorianDate, DatePickerProps } from "./types";
 
@@ -7,24 +9,17 @@ export { default as Calendar } from "./components/Calendar";
 export { default as DateInput } from "./components/DateInput";
 
 // Utility exports
-export { 
+export {
   convertADToBS,
   convertBSToAD,
   getTodayBS,
   isValidBsDate,
   isDateInRange,
-  getDaysInMonth
+  getDaysInMonth,
 } from "./utils/converter";
 
-export {
-  formatBSDate,
-  parseBSDate
-} from "./utils/formatter";
+export { formatBSDate, parseBSDate } from "./utils/formatter";
 
 // Data exports
-export {
-  bsMonthsEn,
-  bsMonthsNe,
-  bsDaysEn,
-  bsDaysNe
-} from "./data/bs-calendar";
+export { bsMonthsEn, bsMonthsNe, bsDaysEn, bsDaysNe } from "./data/bs-calendar";
+

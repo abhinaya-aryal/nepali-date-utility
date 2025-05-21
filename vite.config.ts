@@ -1,16 +1,25 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: 'src/index.ts',
-      name: 'NepaliDatePicker',
-      formats: ['es'],
+      entry: "src/index.ts",
+      name: "NepaliDateUtility",
+      fileName: "index",
+      formats: ["es", "umd"],
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ["react", "react-dom"],
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+      },
     },
+    cssCodeSplit: true,
   },
 });
+
