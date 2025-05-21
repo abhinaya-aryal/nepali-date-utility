@@ -16,15 +16,15 @@ A beautiful and customizable React date picker component for the Nepali Bikram S
 ## Installation
 
 ```bash
-npm install nepali-datepicker
+npm install nepali-date-utlity
 ```
 
 ## Usage
 
 ```jsx
 import React, { useState } from 'react';
-import { NepaliDatePicker, NepaliDate } from 'nepali-datepicker';
-import 'nepali-datepicker/styles.css'; // Optional: Import default styles
+import { NepaliDatePicker, NepaliDate } from 'nepali-date-utility';
+import 'nepali-date-utility/styles.css'; // Optional: Import default styles
 
 function App() {
   const [selectedDate, setSelectedDate] = useState<NepaliDate | null>(null);
@@ -37,13 +37,13 @@ function App() {
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold mb-4">Nepali Date Picker Demo</h1>
-      
+
       <NepaliDatePicker
         value={selectedDate}
         onChange={handleDateChange}
         placeholder="Select Nepali Date"
       />
-      
+
       {selectedDate && (
         <p className="mt-4">
           Selected: {selectedDate.year}-{selectedDate.month}-{selectedDate.day}
@@ -60,19 +60,19 @@ export default App;
 
 ### NepaliDatePicker Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `NepaliDate \| null` | `null` | Selected date |
-| `onChange` | `(date: NepaliDate) => void` | - | Callback when date changes |
-| `placeholder` | `string` | `"YYYY-MM-DD"` | Placeholder text for input |
-| `disabled` | `boolean` | `false` | Disable the datepicker |
-| `minDate` | `NepaliDate` | - | Min date (inclusive) |
-| `maxDate` | `NepaliDate` | - | Max date (inclusive) |
-| `formatOptions` | `NepaliDateFormatOptions` | `{ format: "YYYY-MM-DD" }` | Format options for date display |
-| `className` | `string` | `""` | Additional class names |
-| `inputClassName` | `string` | `""` | Additional class name for input field |
-| `calendarClassName` | `string` | `""` | Additional class name for calendar popup |
-| `position` | `"bottom" \| "top" \| "auto"` | `"bottom"` | Position of the calendar popup |
+| Prop                | Type                          | Default                    | Description                              |
+| ------------------- | ----------------------------- | -------------------------- | ---------------------------------------- |
+| `value`             | `NepaliDate \| null`          | `null`                     | Selected date                            |
+| `onChange`          | `(date: NepaliDate) => void`  | -                          | Callback when date changes               |
+| `placeholder`       | `string`                      | `"YYYY-MM-DD"`             | Placeholder text for input               |
+| `disabled`          | `boolean`                     | `false`                    | Disable the datepicker                   |
+| `minDate`           | `NepaliDate`                  | -                          | Min date (inclusive)                     |
+| `maxDate`           | `NepaliDate`                  | -                          | Max date (inclusive)                     |
+| `formatOptions`     | `NepaliDateFormatOptions`     | `{ format: "YYYY-MM-DD" }` | Format options for date display          |
+| `className`         | `string`                      | `""`                       | Additional class names                   |
+| `inputClassName`    | `string`                      | `""`                       | Additional class name for input field    |
+| `calendarClassName` | `string`                      | `""`                       | Additional class name for calendar popup |
+| `position`          | `"bottom" \| "top" \| "auto"` | `"bottom"`                 | Position of the calendar popup           |
 
 ### Type Definitions
 
@@ -90,8 +90,8 @@ interface GregorianDate {
 }
 
 interface NepaliDateFormatOptions {
-  format?: 'YYYY-MM-DD' | 'DD-MM-YYYY' | 'MM/DD/YYYY' | 'YYYY/MM/DD' | string;
-  locale?: 'en' | 'ne';
+  format?: "YYYY-MM-DD" | "DD-MM-YYYY" | "MM/DD/YYYY" | "YYYY/MM/DD" | string;
+  locale?: "en" | "ne";
   separator?: string;
 }
 ```
@@ -120,3 +120,4 @@ You can customize the appearance using Tailwind classes:
 ## License
 
 MIT
+

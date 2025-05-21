@@ -138,6 +138,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             onViewDateChange={setViewDate}
             minDate={minDate}
             maxDate={maxDate}
+            locale={formatOptions.locale}
           />
         </div>
       )}
@@ -146,4 +147,3 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 };
 
 export default DatePicker;
-

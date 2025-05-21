@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NepaliDate } from "../types";
-import { bsMonthsEn, toNepaliDigits } from "../data/bs-calendar";
+import { bsMonthsEn, bsMonthsNe, toNepaliDigits } from "../data/bs-calendar";
 import { addMonths } from "../utils/converter";
 
 interface MonthNavigationProps {
@@ -14,10 +14,12 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
   viewDate,
   onViewDateChange,
   locale = "en",
-  className = ""
+  className = "",
 }) => {
   const [showYearDropdown, setShowYearDropdown] = useState(false);
   const [showMonthDropdown, setShowMonthDropdown] = useState(false);
+
+  const monthNames = locale === "ne" ? bsMonthsNe : bsMonthsEn;
 
   const handlePrevMonth = () => {
     onViewDateChange(addMonths(viewDate, -1));
@@ -37,8 +39,7 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
     setShowMonthDropdown(false);
   };
 
-  // Generate year options (10 years before and after current)
-  const yearOptions = Array.from({ length: 21 }, (_, i) => viewDate.year - 10 + i);
+  const yearOptions = Array.from({ length: 91 }, (_, i) => 2000 + i);
 
   return (
     <div className={`flex items-center justify-between p-2 ${className}`}>
@@ -48,8 +49,17 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
         className="p-1 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         aria-label="Previous month"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-          <path fillRule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clipRule="evenodd" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="w-5 h-5"
+        >
+          <path
+            fillRule="evenodd"
+            d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+            clipRule="evenodd"
+          />
         </svg>
       </button>
 
@@ -60,17 +70,19 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
             onClick={() => setShowMonthDropdown(!showMonthDropdown)}
             className="px-2 py-1 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
           >
-            {bsMonthsEn[viewDate.month - 1]}
+            {monthNames[viewDate.month - 1]}
           </button>
-          
+
           {showMonthDropdown && (
             <div className="absolute z-10 mt-1 w-40 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-              {bsMonthsEn.map((month, index) => (
+              {monthNames.map((month, index) => (
                 <div
                   key={month}
                   onClick={() => handleMonthSelect(index + 1)}
                   className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-indigo-100 ${
-                    viewDate.month === index + 1 ? "bg-indigo-50 text-indigo-700" : ""
+                    viewDate.month === index + 1
+                      ? "bg-indigo-50 text-indigo-700"
+                      : ""
                   }`}
                 >
                   {month}
@@ -88,10 +100,10 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
           >
             {locale === "ne" ? toNepaliDigits(viewDate.year) : viewDate.year}
           </button>
-          
+
           {showYearDropdown && (
             <div className="absolute z-10 mt-1 w-24 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-              {yearOptions.map(year => (
+              {yearOptions.map((year) => (
                 <div
                   key={year}
                   onClick={() => handleYearSelect(year)}
@@ -113,8 +125,17 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
         className="p-1 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         aria-label="Next month"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-          <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="w-5 h-5"
+        >
+          <path
+            fillRule="evenodd"
+            d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+            clipRule="evenodd"
+          />
         </svg>
       </button>
     </div>
@@ -122,3 +143,4 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
 };
 
 export default MonthNavigation;
+
