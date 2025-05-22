@@ -4,6 +4,9 @@ import {
   NepaliDate,
   formatBSDate,
   getTodayBS,
+  convertADToBS,
+  convertBSToAD,
+  GregorianDate,
 } from "./index";
 
 function App() {
@@ -12,6 +15,8 @@ function App() {
   );
   const [locale, setLocale] = useState<"en" | "ne">("en");
   const [format, setFormat] = useState<string>("YYYY-MM-DD");
+  const [adToBs, setAdToBs] = useState<NepaliDate | null>(null);
+  const [bsToAd, setBsToAd] = useState<GregorianDate | null>(null);
 
   const handleDateChange = (date: NepaliDate) => {
     setSelectedDate(date);
@@ -26,7 +31,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-100 pt-8 pb-16">
       <div className="max-w-3xl mx-auto px-4">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">
           Nepali DatePicker Demo
@@ -103,9 +108,14 @@ function App() {
                 Custom Input Style
               </label>
               <NepaliDatePicker
-                value={null}
-                inputClassName="border-2 border-purple-500 bg-purple-50 rounded-xl"
+                value={getTodayBS()}
+                inputClassName="text-red-500 bg-purple-50 border-2 border-indigo-500 focus:outline-none focus:ring-1 ring-indigo-500"
+                calendarClassName="text-blue-500"
+                dayClassName="text-blue-500"
+                selectedDayClassName="bg-red-500 text-white"
+                todayClassName="border-blue-500 border-2"
                 placeholder="Custom Input Style"
+                disabledDayClassName="opacity-20"
               />
             </div>
 
@@ -115,9 +125,9 @@ function App() {
               </label>
               <NepaliDatePicker
                 value={null}
-                minDate={{ year: 2080, month: 1, day: 1 }}
-                maxDate={{ year: 2080, month: 12, day: 30 }}
-                placeholder="2080 BS only"
+                minDate={{ year: 2082, month: 1, day: 1 }}
+                maxDate={{ year: 2082, month: 1, day: 31 }}
+                placeholder="2082 BS Baishakh only"
               />
             </div>
           </div>
@@ -148,10 +158,58 @@ function App() {
             </div>
           </div>
         </div>
+
+        <div className="bg-white rounded-lg shadow-md p-6 mt-10">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">
+            BS ↔ AD Conversion
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Gregorian (AD) to Nepali (BS)
+              </label>
+              <input
+                type="date"
+                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3 border"
+                onChange={(e) => {
+                  const ad = new Date(e.target.value);
+                  const bs = convertADToBS(ad);
+                  setAdToBs(bs);
+                }}
+              />
+              {adToBs && (
+                <p className="mt-2 text-gray-600">
+                  BS: {adToBs.year}-{adToBs.month}-{adToBs.day}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Nepali (BS) to Gregorian (AD)
+              </label>
+              <NepaliDatePicker
+                placeholder="Select BS date"
+                onChange={(bsDate) => {
+                  const ad = convertBSToAD(bsDate);
+                  setBsToAd(ad);
+                }}
+                position="top"
+                className="w-full"
+              />
+              {bsToAd && (
+                <p className="mt-2 text-gray-600">
+                  AD: {bsToAd.year}-{String(bsToAd.month).padStart(2, "0")}-
+                  {String(bsToAd.day).padStart(2, "0")}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
 export default App;
-

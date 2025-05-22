@@ -5,6 +5,7 @@ import {
   getFirstDayOfMonth,
   isDateInRange,
   compareDates,
+  getTodayBS,
 } from "../utils/converter";
 import {
   bsDaysShortEn,
@@ -21,7 +22,11 @@ export const Calendar: React.FC<CalendarProps> = ({
   onViewDateChange,
   minDate,
   maxDate,
-  className = "",
+  calendarClassName = "text-gray-500 font-medium bg-white",
+  dayClassName = "text-gray-900",
+  selectedDayClassName = "bg-indigo-600 text-white cursor-not-allowed",
+  todayClassName = "text-indigo-600 border-2 border-indigo-600 font-bold",
+  disabledDayClassName = "opacity-50 cursor-not-allowed",
 }) => {
   // Get first day of month (0 = Sunday, 6 = Saturday)
   const firstDayOfMonth = getFirstDayOfMonth(viewDate.year, viewDate.month);
@@ -40,7 +45,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         {dayNames.map((day, index) => (
           <div
             key={`day-name-${index}`}
-            className="text-center text-xs font-medium text-gray-500 py-1"
+            className={`text-center py-1 text-xs ${calendarClassName}`}
           >
             {day}
           </div>
@@ -68,11 +73,12 @@ export const Calendar: React.FC<CalendarProps> = ({
           selectedDate && compareDates(selectedDate, date) === 0;
 
         const isToday =
-          compareDates(date, {
+          /* compareDates(date, {
             year: new Date().getFullYear() + 57, // Approximate BS year from AD
             month: new Date().getMonth() + 1,
             day: new Date().getDate(),
-          }) === 0;
+          }) === 0; */
+          compareDates(date, getTodayBS()) === 0;
 
         const isInRange = isDateInRange(date, minDate, maxDate);
 
@@ -84,10 +90,10 @@ export const Calendar: React.FC<CalendarProps> = ({
             onClick={() => isInRange && onDateSelect(date)}
             className={`
               relative h-8 w-8 flex items-center justify-center text-sm rounded-full
-              ${isSelected ? "bg-indigo-600 text-white" : "text-gray-900"}
-              ${isToday && !isSelected ? "text-indigo-600 font-bold" : ""}
-              ${isInRange ? "hover:bg-gray-100" : "opacity-50 cursor-not-allowed"}
-              ${!isSelected && !isToday ? "hover:bg-gray-100" : ""}
+              ${isSelected ? selectedDayClassName : dayClassName}
+              ${isToday && !isSelected ? todayClassName : ""}
+              ${isInRange && !isSelected ? "hover:bg-gray-200" : ""}
+              ${!isInRange ? `${disabledDayClassName} cursor-not-allowed` : ""}
               focus:outline-none focus:ring-2 focus:ring-indigo-500
             `}
             aria-selected={isSelected ? "true" : "false"}
@@ -121,7 +127,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   };
 
   return (
-    <div className={`bg-white rounded-md shadow-lg ${className}`}>
+    <div className={`bg-white rounded-md shadow-lg ${calendarClassName}`}>
       <MonthNavigation
         viewDate={viewDate}
         onViewDateChange={onViewDateChange}

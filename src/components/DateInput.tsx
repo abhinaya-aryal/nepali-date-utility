@@ -1,19 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import { NepaliDate, NepaliDateFormatOptions } from "../types";
 import { formatBSDate } from "../utils/formatter";
 import { isValidBsDate } from "../utils/converter";
-
-interface DateInputProps {
-  value?: NepaliDate | null;
-  onChange?: (value: string) => void;
-  onSelect?: (date: NepaliDate | null) => void;
-  placeholder?: string;
-  disabled?: boolean;
-  formatOptions?: NepaliDateFormatOptions;
-  className?: string;
-  onFocus?: () => void;
-  onBlur?: () => void;
-}
+import { DateInputProps } from "../types";
 
 export const DateInput: React.FC<DateInputProps> = ({
   value,
@@ -21,7 +9,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   placeholder = "YYYY-MM-DD",
   disabled = false,
   formatOptions = { format: "YYYY-MM-DD" },
-  className = "",
+  className = "border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ",
   onFocus,
   onBlur,
 }) => {
@@ -69,10 +57,9 @@ export const DateInput: React.FC<DateInputProps> = ({
       onBlur={handleBlur}
       placeholder={placeholder}
       disabled={disabled}
-      className={`px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full ${className}`}
+      className={`px-3 py-2 rounded-md shadow-sm block w-full ${className}`}
     />
   );
 };
 
 export default DateInput;
-

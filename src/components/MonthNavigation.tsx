@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import { NepaliDate } from "../types";
 import { bsMonthsEn, bsMonthsNe, toNepaliDigits } from "../data/bs-calendar";
 import { addMonths } from "../utils/converter";
-
-interface MonthNavigationProps {
-  viewDate: NepaliDate;
-  onViewDateChange: (date: NepaliDate) => void;
-  locale?: "en" | "ne";
-  className?: string;
-}
+import { MonthNavigationProps } from "../types";
 
 export const MonthNavigation: React.FC<MonthNavigationProps> = ({
   viewDate,
@@ -143,4 +136,3 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
 };
 
 export default MonthNavigation;
-

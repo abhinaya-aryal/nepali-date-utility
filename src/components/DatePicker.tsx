@@ -13,10 +13,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   minDate,
   maxDate,
   formatOptions = { format: "YYYY-MM-DD" },
-  className = "",
-  inputClassName = "",
-  calendarClassName = "",
+  className,
+  inputClassName,
+  calendarClassName,
   position = "bottom",
+  dayClassName,
+  selectedDayClassName,
+  todayClassName,
+  disabledDayClassName,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [viewDate, setViewDate] = useState<NepaliDate>(value || getTodayBS());
@@ -132,6 +136,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           className={`absolute z-10 ${getCalendarPosition()} w-72 ${calendarClassName}`}
         >
           <Calendar
+            calendarClassName={calendarClassName}
+            dayClassName={dayClassName}
+            selectedDayClassName={selectedDayClassName}
+            todayClassName={todayClassName}
+            disabledDayClassName={disabledDayClassName}
             selectedDate={selectedDate}
             viewDate={viewDate}
             onDateSelect={handleDateSelect}

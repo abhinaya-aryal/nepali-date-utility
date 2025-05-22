@@ -52,9 +52,6 @@ export interface DatePickerProps {
    */
   formatOptions?: NepaliDateFormatOptions;
 
-  /**
-   * Additional class names
-   */
   className?: string;
 
   /**
@@ -71,6 +68,26 @@ export interface DatePickerProps {
    * Position of the calendar popup
    */
   position?: "bottom" | "top" | "auto";
+
+  /**
+   * Additional class names for day in claendar
+   */
+  dayClassName?: string;
+
+  /**
+   * Additional class names for selected day in calendar
+   */
+  selectedDayClassName?: string;
+
+  /**
+   * Additional class names for today date in claendar
+   */
+  todayClassName?: string;
+
+  /**
+   * Additional class names for disabled day in calendar
+   */
+  disabledDayClassName?: string;
 }
 
 export interface CalendarProps {
@@ -111,6 +128,44 @@ export interface CalendarProps {
   /**
    * Additional class names
    */
-  className?: string;
+  calendarClassName?: string;
+
+  /**
+   * Additional class names
+   */
+  dayClassName?: string;
+
+  /**
+   * Additional class names
+   */
+  selectedDayClassName?: string;
+
+  /**
+   * Additional class names
+   */
+  todayClassName?: string;
+
+  /**
+   * Additional class names
+   */
+  disabledDayClassName?: string;
 }
 
+export interface DateInputProps {
+  value?: NepaliDate | null;
+  onChange?: (value: string) => void;
+  onSelect?: (date: NepaliDate | null) => void;
+  placeholder?: string;
+  disabled?: boolean;
+  formatOptions?: NepaliDateFormatOptions;
+  className?: string;
+  onFocus?: () => void;
+  onBlur?: () => void;
+}
+
+export interface MonthNavigationProps {
+  viewDate: NepaliDate;
+  onViewDateChange: (date: NepaliDate) => void;
+  locale?: "en" | "ne";
+  className?: string;
+}
