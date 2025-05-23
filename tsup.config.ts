@@ -1,20 +1,21 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: {
-    index: 'src/index.ts'
+    index: "src/index.ts",
   },
-  format: ['esm'],
+  format: ["esm"],
   dts: true,
   splitting: false,
   sourcemap: true,
   clean: true,
   treeshake: true,
-  external: ['react', 'react-dom'],
+  external: ["react"],
   injectStyle: false,
   esbuildOptions(options) {
     options.banner = {
-      js: '// Nepali DatePicker - Beautiful React component for Nepali Bikram Sambat calendar',
+      js: "// Nepali Date Utility- Beautiful React component for Nepali Bikram Sambat calendar",
     };
   },
 });
+

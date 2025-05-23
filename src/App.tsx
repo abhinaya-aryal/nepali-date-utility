@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import {
   NepaliDatePicker,
-  NepaliDate,
-  formatBSDate,
+  CustomDate,
+  formatDate,
   getTodayBS,
   convertADToBS,
   convertBSToAD,
-  GregorianDate,
 } from "./index";
 
 function App() {
-  const [selectedDate, setSelectedDate] = useState<NepaliDate | null>(
+  const [selectedDate, setSelectedDate] = useState<CustomDate | null>(
     getTodayBS(),
   );
   const [locale, setLocale] = useState<"en" | "ne">("en");
   const [format, setFormat] = useState<string>("YYYY-MM-DD");
-  const [adToBs, setAdToBs] = useState<NepaliDate | null>(null);
-  const [bsToAd, setBsToAd] = useState<GregorianDate | null>(null);
+  const [adToBs, setAdToBs] = useState<CustomDate | null>(null);
+  const [bsToAd, setBsToAd] = useState<CustomDate | null>(null);
 
-  const handleDateChange = (date: NepaliDate) => {
+  const handleDateChange = (date: CustomDate) => {
     setSelectedDate(date);
   };
 
@@ -34,7 +33,7 @@ function App() {
     <div className="min-h-screen bg-gray-100 pt-8 pb-16">
       <div className="max-w-3xl mx-auto px-4">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">
-          Nepali DatePicker Demo
+          Nepali Date Utility
         </h1>
 
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -58,7 +57,7 @@ function App() {
             <div className="bg-gray-50 rounded p-4 mb-4">
               <p className="text-sm text-gray-500 mb-1">Selected Date</p>
               <p className="font-medium">
-                {formatBSDate(selectedDate, { format, locale })}
+                {formatDate(selectedDate, { format, locale })}
               </p>
             </div>
           )}
@@ -180,7 +179,7 @@ function App() {
               />
               {adToBs && (
                 <p className="mt-2 text-gray-600">
-                  BS: {adToBs.year}-{adToBs.month}-{adToBs.day}
+                  BS: {formatDate(adToBs, { separator: "/" })}
                 </p>
               )}
             </div>
@@ -199,10 +198,7 @@ function App() {
                 className="w-full"
               />
               {bsToAd && (
-                <p className="mt-2 text-gray-600">
-                  AD: {bsToAd.year}-{String(bsToAd.month).padStart(2, "0")}-
-                  {String(bsToAd.day).padStart(2, "0")}
-                </p>
+                <p className="mt-2 text-gray-600">AD: {formatDate(bsToAd)}</p>
               )}
             </div>
           </div>

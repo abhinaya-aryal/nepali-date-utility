@@ -1,7 +1,7 @@
 import "./index.css";
 
 // Type exports
-export type { NepaliDate, GregorianDate, DatePickerProps } from "./types";
+export type { CustomDate, DatePickerProps } from "./types";
 
 // Component exports
 export { default as NepaliDatePicker } from "./components/DatePicker";
@@ -18,8 +18,7 @@ export {
   getDaysInMonth,
 } from "./utils/converter";
 
-export { formatBSDate, parseBSDate } from "./utils/formatter";
+export { formatDate, parseDate } from "./utils/formatter";
 
 // Data exports
 export { bsMonthsEn, bsMonthsNe, bsDaysEn, bsDaysNe } from "./data/bs-calendar";
-

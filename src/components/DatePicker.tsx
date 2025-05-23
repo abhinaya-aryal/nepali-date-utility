@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import { DatePickerProps, NepaliDate } from "../types";
+import { DatePickerProps, CustomDate } from "../types";
 import { getTodayBS, isValidBsDate } from "../utils/converter";
-import { parseBSDate } from "../utils/formatter";
+import { parseDate } from "../utils/formatter";
 import Calendar from "./Calendar";
 import DateInput from "./DateInput";
 
@@ -23,8 +23,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   disabledDayClassName,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [viewDate, setViewDate] = useState<NepaliDate>(value || getTodayBS());
-  const [selectedDate, setSelectedDate] = useState<NepaliDate | null>(
+  const [viewDate, setViewDate] = useState<CustomDate>(value || getTodayBS());
+  const [selectedDate, setSelectedDate] = useState<CustomDate | null>(
     value || null,
   );
   const containerRef = useRef<HTMLDivElement>(null);
@@ -55,7 +55,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   }, []);
 
   // Handle date selection from calendar
-  const handleDateSelect = (date: NepaliDate) => {
+  const handleDateSelect = (date: CustomDate) => {
     setSelectedDate(date);
     setIsOpen(false);
 
@@ -73,7 +73,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
   // Handle input value change
   const handleInputChange = (value: string) => {
-    const date = parseBSDate(value, formatOptions.format);
+    const date = parseDate(value, formatOptions.format);
 
     if (date && isValidBsDate(date)) {
       setSelectedDate(date);

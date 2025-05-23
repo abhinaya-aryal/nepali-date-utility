@@ -1,16 +1,10 @@
-export interface NepaliDate {
+export interface CustomDate {
   year: number;
   month: number;
   day: number;
 }
 
-export interface GregorianDate {
-  year: number;
-  month: number;
-  day: number;
-}
-
-export type NepaliDateFormatOptions = {
+export type CustomDateFormatOptions = {
   format?: "YYYY-MM-DD" | "DD-MM-YYYY" | "MM/DD/YYYY" | "YYYY/MM/DD" | string;
   locale?: "en" | "ne";
   separator?: string;
@@ -20,12 +14,12 @@ export interface DatePickerProps {
   /**
    * Selected date in Bikram Sambat format
    */
-  value?: NepaliDate | null;
+  value?: CustomDate | null;
 
   /**
    * Callback when date changes
    */
-  onChange?: (date: NepaliDate) => void;
+  onChange?: (date: CustomDate) => void;
 
   /**
    * Placeholder text for input
@@ -40,17 +34,17 @@ export interface DatePickerProps {
   /**
    * Min date (inclusive)
    */
-  minDate?: NepaliDate;
+  minDate?: CustomDate;
 
   /**
    * Max date (inclusive)
    */
-  maxDate?: NepaliDate;
+  maxDate?: CustomDate;
 
   /**
    * Format for displaying the date
    */
-  formatOptions?: NepaliDateFormatOptions;
+  formatOptions?: CustomDateFormatOptions;
 
   className?: string;
 
@@ -98,32 +92,32 @@ export interface CalendarProps {
   /**
    * Currently selected date
    */
-  selectedDate?: NepaliDate | null;
+  selectedDate?: CustomDate | null;
 
   /**
    * Currently viewed month and year
    */
-  viewDate: NepaliDate;
+  viewDate: CustomDate;
 
   /**
    * Callback when date is selected
    */
-  onDateSelect: (date: NepaliDate) => void;
+  onDateSelect: (date: CustomDate) => void;
 
   /**
    * Callback when month view changes
    */
-  onViewDateChange: (date: NepaliDate) => void;
+  onViewDateChange: (date: CustomDate) => void;
 
   /**
    * Min date (inclusive)
    */
-  minDate?: NepaliDate;
+  minDate?: CustomDate;
 
   /**
    * Max date (inclusive)
    */
-  maxDate?: NepaliDate;
+  maxDate?: CustomDate;
 
   /**
    * Additional class names
@@ -152,20 +146,20 @@ export interface CalendarProps {
 }
 
 export interface DateInputProps {
-  value?: NepaliDate | null;
+  value?: CustomDate | null;
   onChange?: (value: string) => void;
-  onSelect?: (date: NepaliDate | null) => void;
+  onSelect?: (date: CustomDate | null) => void;
   placeholder?: string;
   disabled?: boolean;
-  formatOptions?: NepaliDateFormatOptions;
+  formatOptions?: CustomDateFormatOptions;
   className?: string;
   onFocus?: () => void;
   onBlur?: () => void;
 }
 
 export interface MonthNavigationProps {
-  viewDate: NepaliDate;
-  onViewDateChange: (date: NepaliDate) => void;
+  viewDate: CustomDate;
+  onViewDateChange: (date: CustomDate) => void;
   locale?: "en" | "ne";
   className?: string;
 }

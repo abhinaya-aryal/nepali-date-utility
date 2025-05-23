@@ -1,5 +1,5 @@
 import React from "react";
-import { NepaliDate, CalendarProps } from "../types";
+import { CustomDate, CalendarProps } from "../types";
 import {
   getDaysInMonth,
   getFirstDayOfMonth,
@@ -63,7 +63,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       const isCurrentMonth = dayOfMonth > 0 && dayOfMonth <= daysInMonth;
 
       if (isCurrentMonth) {
-        const date: NepaliDate = {
+        const date: CustomDate = {
           year: viewDate.year,
           month: viewDate.month,
           day: dayOfMonth,

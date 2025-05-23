@@ -24,20 +24,20 @@ npm install nepali-date-utlity
 
 ```tsx
 import React, { useState } from "react";
-import { NepaliDatePicker, NepaliDate } from "nepali-date-utility";
+import { NepaliDatePicker, CustomDate, formatDate } from "nepali-date-utility";
 import "nepali-date-utility/styles.css";
 
 function App() {
-  const [selectedDate, setSelectedDate] = useState<NepaliDate | null>(null);
+  const [selectedDate, setSelectedDate] = useState<CustomDate | null>(null);
 
-  const handleDateChange = (date: NepaliDate) => {
+  const handleDateChange = (date: CustomDate) => {
     setSelectedDate(date);
     console.log("Selected date:", date);
   };
 
   return (
     <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Nepali Date Picker Demo</h1>
+      <h1 className="text-xl font-bold mb-4">Nepali Date Utility Demo</h1>
 
       <NepaliDatePicker
         value={selectedDate}
@@ -46,9 +46,7 @@ function App() {
       />
 
       {selectedDate && (
-        <p className="mt-4">
-          Selected: {selectedDate.year}-{selectedDate.month}-{selectedDate.day}
-        </p>
+        <p className="mt-4">Selected: {formatDate(selectedDate)}</p>
       )}
     </div>
   );
@@ -63,13 +61,13 @@ export default App;
 
 | Prop                   | Type                          | Default                    | Description                                                     |
 | ---------------------- | ----------------------------- | -------------------------- | --------------------------------------------------------------- |
-| `value`                | `NepaliDate \| null`          | `null`                     | Selected date                                                   |
-| `onChange`             | `(date: NepaliDate) => void`  | -                          | Callback when date changes                                      |
+| `value`                | `CustomDate \| null`          | `null`                     | Selected date                                                   |
+| `onChange`             | `(date: CustomDate) => void`  | -                          | Callback when date changes                                      |
 | `placeholder`          | `string`                      | `"YYYY-MM-DD"`             | Placeholder text for input                                      |
 | `disabled`             | `boolean`                     | `false`                    | Disable the datepicker                                          |
-| `minDate`              | `NepaliDate`                  | -                          | Min date (inclusive)                                            |
-| `maxDate`              | `NepaliDate`                  | -                          | Max date (inclusive)                                            |
-| `formatOptions`        | `NepaliDateFormatOptions`     | `{ format: "YYYY-MM-DD" }` | Format options for date display                                 |
+| `minDate`              | `CustomDate`                  | -                          | Min date (inclusive)                                            |
+| `maxDate`              | `CustomDate`                  | -                          | Max date (inclusive)                                            |
+| `formatOptions`        | `CustomDateFormatOptions`     | `{ format: "YYYY-MM-DD" }` | Format options for date display                                 |
 | `className`            | `string`                      | -                          | Additional class name for the widget (mainly used for `w-full`) |
 | `inputClassName`       | `string`                      | -                          | Override class name for input field                             |
 | `calendarClassName`    | `string`                      | -                          | Override class name for calendar popup                          |
@@ -82,19 +80,13 @@ export default App;
 ### 🧱 Type Definitions
 
 ```typescript
-interface NepaliDate {
+interface CustomDate {
   year: number;
   month: number;
   day: number;
 }
 
-interface GregorianDate {
-  year: number;
-  month: number;
-  day: number;
-}
-
-interface NepaliDateFormatOptions {
+interface CustomDateFormatOptions {
   format?: "YYYY-MM-DD" | "DD-MM-YYYY" | "MM/DD/YYYY" | "YYYY/MM/DD" | string;
   locale?: "en" | "ne";
   separator?: string;
@@ -103,11 +95,11 @@ interface NepaliDateFormatOptions {
 
 ### 🔧 Utility Functions
 
-- `convertADToBS(adDate: Date): NepaliDate` - Convert AD date to BS date
-- `convertBSToAD(bsDate: NepaliDate): GregorianDate` - Convert BS date to AD date
+- `convertADToBS(adDate: Date): CustomDate` - Convert AD date to BS date
+- `convertBSToAD(bsDate: CustomDate): CustomDate` - Convert BS date to AD date
 - `getTodayBS(): NepaliDate` - Get today's date in BS
-- `formatBSDate(date: NepaliDate, options?: NepaliDateFormatOptions): string` - Format BS date to string
-- `parseBSDate(dateStr: string, format?: string): NepaliDate | null` - Parse string to BS date
+- `formatDate(date: CustomDate, options?: CustomDateFormatOptions): string` - Format `customDate` type to string
+- `parseDate(dateStr: string, format?: string): CustomDate | null` - Parse string to `CustomDate` format
 - `isValidBsDate(date: NepaliDate): boolean` - Check if BS date is valid
 
 ## 🎨 Customization Examples
@@ -160,25 +152,23 @@ Explore the component’s features interactively.
 import React, { useState } from "react";
 import {
   NepaliDatePicker,
-  NepaliDate,
-  formatBSDate,
+  CustomDate,
+  formatDate,
   getTodayBS,
   convertADToBS,
   convertBSToAD,
-  GregorianDate,
-} from "nepali-date-utlity";
-import "nepali-date-utility/styles.css";
+} from "./index";
 
 function App() {
-  const [selectedDate, setSelectedDate] = useState<NepaliDate | null>(
+  const [selectedDate, setSelectedDate] = useState<CustomDate | null>(
     getTodayBS(),
   );
   const [locale, setLocale] = useState<"en" | "ne">("en");
   const [format, setFormat] = useState<string>("YYYY-MM-DD");
-  const [adToBs, setAdToBs] = useState<NepaliDate | null>(null);
-  const [bsToAd, setBsToAd] = useState<GregorianDate | null>(null);
+  const [adToBs, setAdToBs] = useState<CustomDate | null>(null);
+  const [bsToAd, setBsToAd] = useState<CustomDate | null>(null);
 
-  const handleDateChange = (date: NepaliDate) => {
+  const handleDateChange = (date: CustomDate) => {
     setSelectedDate(date);
   };
 
@@ -218,7 +208,7 @@ function App() {
             <div className="bg-gray-50 rounded p-4 mb-4">
               <p className="text-sm text-gray-500 mb-1">Selected Date</p>
               <p className="font-medium">
-                {formatBSDate(selectedDate, { format, locale })}
+                {formatDate(selectedDate, { format, locale })}
               </p>
             </div>
           )}
@@ -340,7 +330,7 @@ function App() {
               />
               {adToBs && (
                 <p className="mt-2 text-gray-600">
-                  BS: {adToBs.year}-{adToBs.month}-{adToBs.day}
+                  BS: {formatDate(adToBs, { separator: "/" })}
                 </p>
               )}
             </div>
@@ -359,10 +349,7 @@ function App() {
                 className="w-full"
               />
               {bsToAd && (
-                <p className="mt-2 text-gray-600">
-                  AD: {bsToAd.year}-{String(bsToAd.month).padStart(2, "0")}-
-                  {String(bsToAd.day).padStart(2, "0")}
-                </p>
+                <p className="mt-2 text-gray-600">AD: {formatDate(bsToAd)}</p>
               )}
             </div>
           </div>

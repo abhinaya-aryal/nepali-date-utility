@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { formatBSDate } from "../utils/formatter";
+import { formatDate } from "../utils/formatter";
 import { isValidBsDate } from "../utils/converter";
 import { DateInputProps } from "../types";
 
@@ -14,14 +14,14 @@ export const DateInput: React.FC<DateInputProps> = ({
   onBlur,
 }) => {
   const [inputValue, setInputValue] = useState<string>(
-    value ? formatBSDate(value, formatOptions) : "",
+    value ? formatDate(value, formatOptions) : "",
   );
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Update input value when the value prop changes
   useEffect(() => {
     if (value && isValidBsDate(value)) {
-      setInputValue(formatBSDate(value, formatOptions));
+      setInputValue(formatDate(value, formatOptions));
     } else if (value === null) {
       setInputValue("");
     }
