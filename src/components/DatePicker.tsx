@@ -29,7 +29,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   );
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Update internal state when value changes externally
   useEffect(() => {
     if (value) {
       setSelectedDate(value);
@@ -37,7 +36,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     }
   }, [value]);
 
-  // Click outside handler
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -54,7 +52,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     };
   }, []);
 
-  // Handle date selection from calendar
   const handleDateSelect = (date: CustomDate) => {
     setSelectedDate(date);
     setIsOpen(false);
@@ -64,14 +61,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     }
   };
 
-  // Handle input focus
   const handleInputFocus = () => {
     if (!disabled) {
       setIsOpen(true);
     }
   };
 
-  // Handle input value change
   const handleInputChange = (value: string) => {
     const date = parseDate(value, formatOptions.format);
 
@@ -85,7 +80,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     }
   };
 
-  // Get calendar position style
   const getCalendarPosition = () => {
     switch (position) {
       case "top":
@@ -97,7 +91,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   };
 
   return (
-    <div ref={containerRef} className={`relative inline-block ${className}`}>
+    <div ref={containerRef} className={`nepali-datepicker ${className || ""}`}>
       <div className="relative">
         <DateInput
           value={selectedDate}
@@ -106,13 +100,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           placeholder={placeholder}
           disabled={disabled}
           formatOptions={formatOptions}
-          className={inputClassName}
+          className={`nepali-datepicker-input pr-10 ${inputClassName || ""}`}
         />
-
         <button
           type="button"
           onClick={() => !disabled && setIsOpen(!isOpen)}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
+          className="nepali-datepicker-icon"
           disabled={disabled}
           aria-label="Toggle calendar"
         >
@@ -133,14 +126,22 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
       {isOpen && (
         <div
-          className={`absolute z-10 ${getCalendarPosition()} w-72 ${calendarClassName}`}
+          className={`nepali-datepicker-calendar ${getCalendarPosition()} ${
+            calendarClassName || ""
+          }`}
         >
           <Calendar
             calendarClassName={calendarClassName}
-            dayClassName={dayClassName}
-            selectedDayClassName={selectedDayClassName}
-            todayClassName={todayClassName}
-            disabledDayClassName={disabledDayClassName}
+            dayClassName={`nepali-datepicker-day ${dayClassName || ""}`}
+            selectedDayClassName={`nepali-datepicker-day-selected ${
+              selectedDayClassName || ""
+            }`}
+            todayClassName={`nepali-datepicker-day-today ${
+              todayClassName || ""
+            }`}
+            disabledDayClassName={`nepali-datepicker-day-disabled ${
+              disabledDayClassName || ""
+            }`}
             selectedDate={selectedDate}
             viewDate={viewDate}
             onDateSelect={handleDateSelect}

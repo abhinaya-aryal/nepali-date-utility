@@ -6,7 +6,7 @@ import {
   getTodayBS,
   convertADToBS,
   convertBSToAD,
-} from "./index";
+} from "../src";
 
 function App() {
   const [selectedDate, setSelectedDate] = useState<CustomDate | null>(

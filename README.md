@@ -156,7 +156,3 @@ Explore the component’s features interactively.
 ## 📄 License
 
 [MIT](./LICENSE)
-
-```
-
-```

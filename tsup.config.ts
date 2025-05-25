@@ -10,12 +10,12 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   treeshake: true,
-  external: ["react"],
+  external: ["react", "react-dom"],
   injectStyle: false,
+  outDir: "dist",
   esbuildOptions(options) {
     options.banner = {
       js: "// Nepali Date Utility- Beautiful React component for Nepali Bikram Sambat calendar",
     };
   },
 });
-

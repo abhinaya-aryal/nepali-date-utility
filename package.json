@@ -1,36 +1,55 @@
 {
   "name": "nepali-date-utility",
   "version": "1.2.0",
-  "description": "A beautiful React date picker component for Nepali Bikram Sambat calendar",
+  "description": "A beautiful React date picker component with other date utilities for Nepali Bikram Sambat calendar",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "styles": "dist/index.css",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles.css": "./dist/index.css"
+    "./styles.css": "./dist/styles.css"
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "vite",
+    "dev": "cd example && vite",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint src/**/*.{ts,tsx}",
     "prepare": "npm run build"
   },
   "peerDependencies": {
     "react": ">=17.0.0",
     "react-dom": ">=17.0.0"
   },
+  "keywords": [
+    "nepali",
+    "date-picker",
+    "bikram-sambat",
+    "bs",
+    "calendar",
+    "react",
+    "tailwindcss",
+    "nepali-date",
+    "nepali-date-utility"
+  ],
+  "author": "Abhinaya Aryal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhinaya-aryal/nepali-date-utility.git"
+  },
+  "homepage": "https://date.aryalabhinaya.com.np",
+  "bugs": {
+    "url": "https://github.com/abhinaya-aryal/nepali-date-utility/issues"
+  },
+  "license": "MIT",
   "devDependencies": {
-    "@types/react": "^18.3.22",
+    "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^4.2.0",
     "autoprefixer": "^10.4.18",
@@ -44,24 +63,5 @@
     "typescript": "^5.3.0",
     "vite": "^5.0.0",
     "vitest": "^1.2.1"
-  },
-  "author": "Abhinaya Aryal",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/abhinaya-aryal/nepali-date-utility.git"
-  },
-  "homepage": "https://date.aryalabhinaya.com.np",
-  "bugs": {
-    "url": "https://github.com/abhinaya-aryal/nepali-date-utility/issues"
-  },
-  "license": "MIT",
-  "keywords": [
-    "nepali",
-    "date-picker",
-    "bikram-sambat",
-    "bs",
-    "calendar",
-    "react",
-    "tailwindcss"
-  ]
+  }
 }

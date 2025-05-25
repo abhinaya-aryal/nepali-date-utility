@@ -1,4 +1,4 @@
-import "./index.css";
+import "./package.css";
 
 // Type exports
 export type { CustomDate, DatePickerProps } from "./types";
