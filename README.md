@@ -22,6 +22,19 @@ npm install nepali-date-utlity
 
 ## 🚀 Usage
 
+In `tailwind.config.js`,
+
+```js
+// tailwind.config.js
+
+...
+content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/nepali-date-utility/**/*.{js,ts,jsx,tsx}"
+],
+...
+```
+
 ```tsx
 import React, { useState } from "react";
 import {
@@ -30,7 +43,6 @@ import {
   formatDate,
   convertBSToAD,
 } from "nepali-date-utility";
-import "nepali-date-utility/styles.css";
 
 function App() {
   const [selectedDate, setSelectedDate] = useState<CustomDate | null>(null);
@@ -117,10 +129,10 @@ You can customize the appearance using Tailwind classes:
 <NepaliDatePicker
   value={getTodayBS()}
   inputClassName="text-red-500 bg-purple-50 border-2 border-indigo-500 focus:outline-none focus:ring-1 ring-indigo-500"
-  calendarClassName="text-blue-500"
+  calendarClassName="text-blue-500 border-2 border-red-500"
   dayClassName="text-blue-500"
-  selectedDayClassName="bg-red-500 text-white"
-  todayClassName="border-blue-500 border-2"
+  selectedDayClassName="bg-red-500 text-white hover:bg-red-500"
+  todayClassName="border-red-500 border-2"
   placeholder="Custom Input Style"
   disabledDayClassName="opacity-20"
 />

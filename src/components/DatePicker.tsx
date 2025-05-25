@@ -13,14 +13,14 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   minDate,
   maxDate,
   formatOptions = { format: "YYYY-MM-DD" },
-  className,
-  inputClassName,
-  calendarClassName,
+  className = "",
+  inputClassName = "",
+  calendarClassName = "",
+  dayClassName = "",
+  selectedDayClassName = "",
+  todayClassName = "",
+  disabledDayClassName = "",
   position = "bottom",
-  dayClassName,
-  selectedDayClassName,
-  todayClassName,
-  disabledDayClassName,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [viewDate, setViewDate] = useState<CustomDate>(value || getTodayBS());
@@ -91,7 +91,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   };
 
   return (
-    <div ref={containerRef} className={`nepali-datepicker ${className || ""}`}>
+    <div ref={containerRef} className={`relative inline-block ${className}`}>
       <div className="relative">
         <DateInput
           value={selectedDate}
@@ -100,12 +100,12 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           placeholder={placeholder}
           disabled={disabled}
           formatOptions={formatOptions}
-          className={`nepali-datepicker-input pr-10 ${inputClassName || ""}`}
+          className={`px-3 py-2 rounded-md shadow-sm block w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-10 ${inputClassName}`}
         />
         <button
           type="button"
           onClick={() => !disabled && setIsOpen(!isOpen)}
-          className="nepali-datepicker-icon"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 cursor-pointer hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={disabled}
           aria-label="Toggle calendar"
         >
@@ -126,22 +126,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
       {isOpen && (
         <div
-          className={`nepali-datepicker-calendar ${getCalendarPosition()} ${
-            calendarClassName || ""
-          }`}
+          className={`absolute z-10 w-72 bg-white rounded-md shadow-lg ${getCalendarPosition()}`}
         >
           <Calendar
-            calendarClassName={calendarClassName}
-            dayClassName={`nepali-datepicker-day ${dayClassName || ""}`}
-            selectedDayClassName={`nepali-datepicker-day-selected ${
-              selectedDayClassName || ""
-            }`}
-            todayClassName={`nepali-datepicker-day-today ${
-              todayClassName || ""
-            }`}
-            disabledDayClassName={`nepali-datepicker-day-disabled ${
-              disabledDayClassName || ""
-            }`}
             selectedDate={selectedDate}
             viewDate={viewDate}
             onDateSelect={handleDateSelect}
@@ -149,6 +136,15 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             minDate={minDate}
             maxDate={maxDate}
             locale={formatOptions.locale}
+            calendarClassName={`border-gray-300 border shadow-lg rounded-md bg-white ${calendarClassName}`}
+            dayClassName={`relative h-8 w-8 flex items-center justify-center text-sm text-gray-800 font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${dayClassName}`}
+            selectedDayClassName={`text-white cursor-not-allowed bg-indigo-500 ${
+              selectedDayClassName
+            }`}
+            todayClassName={`text-indigo-600 border-2 border-indigo-600 font-bold ${todayClassName}`}
+            disabledDayClassName={`opacity-50 cursor-not-allowed hover:bg-transparent ${
+              disabledDayClassName
+            }`}
           />
         </div>
       )}

@@ -10,7 +10,7 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   treeshake: true,
-  external: ["react", "react-dom"],
+  external: ["react"],
   injectStyle: false,
   outDir: "dist",
   esbuildOptions(options) {

@@ -70,7 +70,7 @@ function App() {
               <select
                 value={format}
                 onChange={handleFormatChange}
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3 border"
+                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3 border bg-white"
               >
                 <option value="YYYY-MM-DD">YYYY-MM-DD</option>
                 <option value="DD-MM-YYYY">DD-MM-YYYY</option>
@@ -87,7 +87,7 @@ function App() {
               <select
                 value={locale}
                 onChange={handleLocaleChange}
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3 border"
+                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3 border bg-white"
               >
                 <option value="en">English</option>
                 <option value="ne">नेपाली</option>
@@ -109,10 +109,10 @@ function App() {
               <NepaliDatePicker
                 value={getTodayBS()}
                 inputClassName="text-red-500 bg-purple-50 border-2 border-indigo-500 focus:outline-none focus:ring-1 ring-indigo-500"
-                calendarClassName="text-blue-500"
+                calendarClassName="text-blue-500 border-2 border-red-500"
                 dayClassName="text-blue-500"
-                selectedDayClassName="bg-red-500 text-white"
-                todayClassName="border-blue-500 border-2"
+                selectedDayClassName="bg-red-500 text-white hover:bg-red-500"
+                todayClassName="border-red-500 border-2"
                 placeholder="Custom Input Style"
                 disabledDayClassName="opacity-20"
               />

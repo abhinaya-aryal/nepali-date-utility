@@ -9,7 +9,7 @@ export const DateInput: React.FC<DateInputProps> = ({
   placeholder = "YYYY-MM-DD",
   disabled = false,
   formatOptions = { format: "YYYY-MM-DD" },
-  className = "border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ",
+  className,
   onFocus,
   onBlur,
 }) => {
@@ -57,7 +57,7 @@ export const DateInput: React.FC<DateInputProps> = ({
       onBlur={handleBlur}
       placeholder={placeholder}
       disabled={disabled}
-      className={`px-3 py-2 rounded-md shadow-sm block w-full ${className}`}
+      className={`${className}`}
     />
   );
 };

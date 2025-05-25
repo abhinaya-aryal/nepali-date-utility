@@ -7,7 +7,6 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
   viewDate,
   onViewDateChange,
   locale = "en",
-  className = "",
 }) => {
   const [showYearDropdown, setShowYearDropdown] = useState(false);
   const [showMonthDropdown, setShowMonthDropdown] = useState(false);
@@ -35,11 +34,13 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
   const yearOptions = Array.from({ length: 91 }, (_, i) => 2000 + i);
 
   return (
-    <div className={`flex items-center justify-between p-2 ${className}`}>
+    <div
+      className={`flex items-center justify-between p-2 border-b border-gray-300`}
+    >
       <button
         type="button"
         onClick={handlePrevMonth}
-        className="p-1 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="p-1 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         aria-label="Previous month"
       >
         <svg
@@ -61,20 +62,20 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
           <button
             type="button"
             onClick={() => setShowMonthDropdown(!showMonthDropdown)}
-            className="px-2 py-1 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+            className="px-2 py-1 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
           >
             {monthNames[viewDate.month - 1]}
           </button>
 
           {showMonthDropdown && (
-            <div className="absolute z-10 mt-1 w-40 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+            <div className="absolute z-10 mt-1 w-max bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
               {monthNames.map((month, index) => (
                 <div
                   key={month}
                   onClick={() => handleMonthSelect(index + 1)}
-                  className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-indigo-100 ${
+                  className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-indigo-200 font-medium ${
                     viewDate.month === index + 1
-                      ? "bg-indigo-50 text-indigo-700"
+                      ? "bg-indigo-500 text-white hover:bg-indigo-500"
                       : ""
                   }`}
                 >
@@ -89,19 +90,21 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
           <button
             type="button"
             onClick={() => setShowYearDropdown(!showYearDropdown)}
-            className="px-2 py-1 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+            className="px-2 py-1 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
           >
             {locale === "ne" ? toNepaliDigits(viewDate.year) : viewDate.year}
           </button>
 
           {showYearDropdown && (
-            <div className="absolute z-10 mt-1 w-24 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+            <div className="absolute z-10 mt-1 w-max bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
               {yearOptions.map((year) => (
                 <div
                   key={year}
                   onClick={() => handleYearSelect(year)}
-                  className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-indigo-100 ${
-                    viewDate.year === year ? "bg-indigo-50 text-indigo-700" : ""
+                  className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-indigo-200 ${
+                    viewDate.year === year
+                      ? "bg-indigo-500 text-white hover:bg-indigo-500"
+                      : ""
                   }`}
                 >
                   {locale === "ne" ? toNepaliDigits(year) : year}
@@ -115,7 +118,7 @@ export const MonthNavigation: React.FC<MonthNavigationProps> = ({
       <button
         type="button"
         onClick={handleNextMonth}
-        className="p-1 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="p-1 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         aria-label="Next month"
       >
         <svg

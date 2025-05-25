@@ -10,7 +10,7 @@ import {
 import {
   bsDaysShortEn,
   bsDaysShortNe,
-  nepaliDigits,
+  toNepaliDigits,
 } from "../data/bs-calendar";
 import MonthNavigation from "./MonthNavigation";
 
@@ -22,11 +22,11 @@ export const Calendar: React.FC<CalendarProps> = ({
   onViewDateChange,
   minDate,
   maxDate,
-  calendarClassName = "text-gray-500 font-medium bg-white",
-  dayClassName = "text-gray-900",
-  selectedDayClassName = "bg-indigo-600 text-white cursor-not-allowed",
-  todayClassName = "text-indigo-600 border-2 border-indigo-600 font-bold",
-  disabledDayClassName = "opacity-50 cursor-not-allowed",
+  calendarClassName,
+  dayClassName,
+  selectedDayClassName,
+  todayClassName,
+  disabledDayClassName,
 }) => {
   // Get first day of month (0 = Sunday, 6 = Saturday)
   const firstDayOfMonth = getFirstDayOfMonth(viewDate.year, viewDate.month);
@@ -43,10 +43,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     days.push(
       <div key="day-names" className="grid grid-cols-7 mb-1">
         {dayNames.map((day, index) => (
-          <div
-            key={`day-name-${index}`}
-            className={`text-center py-1 text-xs ${calendarClassName}`}
-          >
+          <div key={`day-name-${index}`} className={dayClassName}>
             {day}
           </div>
         ))}
@@ -72,13 +69,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         const isSelected =
           selectedDate && compareDates(selectedDate, date) === 0;
 
-        const isToday =
-          /* compareDates(date, {
-            year: new Date().getFullYear() + 57, // Approximate BS year from AD
-            month: new Date().getMonth() + 1,
-            day: new Date().getDate(),
-          }) === 0; */
-          compareDates(date, getTodayBS()) === 0;
+        const isToday = compareDates(date, getTodayBS()) === 0;
 
         const isInRange = isDateInRange(date, minDate, maxDate);
 
@@ -89,12 +80,10 @@ export const Calendar: React.FC<CalendarProps> = ({
             disabled={!isInRange}
             onClick={() => isInRange && onDateSelect(date)}
             className={`
-              relative h-8 w-8 flex items-center justify-center text-sm rounded-full
               ${isSelected ? selectedDayClassName : dayClassName}
               ${isToday && !isSelected ? todayClassName : ""}
-              ${isInRange && !isSelected ? "hover:bg-gray-200" : ""}
-              ${!isInRange ? `${disabledDayClassName} cursor-not-allowed` : ""}
-              focus:outline-none focus:ring-2 focus:ring-indigo-500
+              ${isInRange && !isSelected ? "hover:bg-gray-300" : ""}
+              ${!isInRange ? `${disabledDayClassName}` : ""}
             `}
             aria-selected={isSelected ? "true" : "false"}
           >
@@ -127,30 +116,16 @@ export const Calendar: React.FC<CalendarProps> = ({
   };
 
   return (
-    <div className={`bg-white rounded-md shadow-lg ${calendarClassName}`}>
+    <div className={calendarClassName}>
       <MonthNavigation
         viewDate={viewDate}
         onViewDateChange={onViewDateChange}
         locale={locale}
-        className="border-b"
       />
 
       <div className="p-3">{generateCalendarDays()}</div>
     </div>
   );
 };
-
-function toNepaliDigits(num: number): string {
-  return num
-    .toString()
-    .split("")
-    .map((c) => {
-      if (c >= "0" && c <= "9") {
-        return nepaliDigits[parseInt(c)];
-      }
-      return c;
-    })
-    .join("");
-}
 
 export default Calendar;
