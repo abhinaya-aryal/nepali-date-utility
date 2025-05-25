@@ -22,7 +22,7 @@ npm install nepali-date-utlity
 
 ## 🚀 Usage
 
-In `tailwind.config.js`,
+In `tailwind.config.js`, add `"./node_modules/nepali-date-utlity/**/*.{js,ts,jsx,tsx}"`
 
 ```js
 // tailwind.config.js
@@ -33,6 +33,12 @@ content: [
     "./node_modules/nepali-date-utility/**/*.{js,ts,jsx,tsx}"
 ],
 ...
+```
+
+Or if you are working in vite app, then in your main styleshteet add the following:
+
+```css
+@source "../node_modules/nepali-date-utility";
 ```
 
 ```tsx
