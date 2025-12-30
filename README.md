@@ -17,7 +17,7 @@ A beautiful and customizable React date picker component along with other utilit
 ## 📦 Installation
 
 ```bash
-npm install nepali-date-utlity
+npm install nepali-date-utility
 ```
 
 ## 🚀 Usage

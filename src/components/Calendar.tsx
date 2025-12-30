@@ -13,6 +13,7 @@ import {
   toNepaliDigits,
 } from "../data/bs-calendar";
 import MonthNavigation from "./MonthNavigation";
+import { twJoin, twMerge } from "tailwind-merge";
 
 export const Calendar: React.FC<CalendarProps> = ({
   locale = "en",
@@ -43,7 +44,13 @@ export const Calendar: React.FC<CalendarProps> = ({
     days.push(
       <div key="day-names" className="grid grid-cols-7 mb-1">
         {dayNames.map((day, index) => (
-          <div key={`day-name-${index}`} className={dayClassName}>
+          <div
+            key={`day-name-${index}`}
+            className={twMerge(
+              "relative h-8 w-8 flex items-center justify-center text-sm text-gray-800 font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500",
+              dayClassName,
+            )}
+          >
             {day}
           </div>
         ))}
@@ -79,12 +86,30 @@ export const Calendar: React.FC<CalendarProps> = ({
             type="button"
             disabled={!isInRange}
             onClick={() => isInRange && onDateSelect(date)}
-            className={`
-              ${isSelected ? selectedDayClassName : dayClassName}
-              ${isToday && !isSelected ? todayClassName : ""}
-              ${isInRange && !isSelected ? "hover:bg-gray-300" : ""}
-              ${!isInRange ? `${disabledDayClassName}` : ""}
-            `}
+            className={twJoin(
+              isSelected
+                ? twMerge(
+                    "text-white cursor-not-allowed bg-indigo-500",
+                    selectedDayClassName,
+                  )
+                : twMerge(
+                    "relative h-8 w-8 flex items-center justify-center text-sm text-gray-800 font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500",
+                    dayClassName,
+                  ),
+              isToday && !isSelected
+                ? twMerge(
+                    "text-indigo-600 border-2 border-indigo-600 font-bold",
+                    todayClassName,
+                  )
+                : "",
+              isInRange && !isSelected ? "hover:bg-gray-300" : "",
+              !isInRange
+                ? twMerge(
+                    "opacity-50 cursor-not-allowed hover:bg-transparent ",
+                    disabledDayClassName,
+                  )
+                : "",
+            )}
             aria-selected={isSelected ? "true" : "false"}
           >
             {locale === "ne" ? toNepaliDigits(dayOfMonth) : dayOfMonth}
@@ -116,14 +141,19 @@ export const Calendar: React.FC<CalendarProps> = ({
   };
 
   return (
-    <div className={calendarClassName}>
+    <div
+      className={twMerge(
+        "border border-gray-300 shadow-lg rounded-md bg-white",
+        calendarClassName,
+      )}
+    >
       <MonthNavigation
         viewDate={viewDate}
         onViewDateChange={onViewDateChange}
         locale={locale}
       />
 
-      <div className="p-3">{generateCalendarDays()}</div>
+      <div className="p-2">{generateCalendarDays()}</div>
     </div>
   );
 };

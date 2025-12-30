@@ -4,6 +4,7 @@ import { getTodayBS, isValidBsDate } from "../utils/converter";
 import { parseDate } from "../utils/formatter";
 import Calendar from "./Calendar";
 import DateInput from "./DateInput";
+import { twMerge } from "tailwind-merge";
 
 export const DatePicker: React.FC<DatePickerProps> = ({
   value,
@@ -100,7 +101,10 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           placeholder={placeholder}
           disabled={disabled}
           formatOptions={formatOptions}
-          className={`px-3 py-2 rounded-md shadow-sm block w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-10 ${inputClassName}`}
+          className={twMerge(
+            "px-3 py-2 rounded-md shadow-sm block w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 pr-10",
+            inputClassName,
+          )}
         />
         <button
           type="button"
@@ -136,15 +140,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
             minDate={minDate}
             maxDate={maxDate}
             locale={formatOptions.locale}
-            calendarClassName={`border-gray-300 border shadow-lg rounded-md bg-white ${calendarClassName}`}
-            dayClassName={`relative h-8 w-8 flex items-center justify-center text-sm text-gray-800 font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${dayClassName}`}
-            selectedDayClassName={`text-white cursor-not-allowed bg-indigo-500 ${
-              selectedDayClassName
-            }`}
-            todayClassName={`text-indigo-600 border-2 border-indigo-600 font-bold ${todayClassName}`}
-            disabledDayClassName={`opacity-50 cursor-not-allowed hover:bg-transparent ${
-              disabledDayClassName
-            }`}
+            calendarClassName={calendarClassName}
+            dayClassName={dayClassName}
+            selectedDayClassName={selectedDayClassName}
+            todayClassName={todayClassName}
+            disabledDayClassName={disabledDayClassName}
           />
         </div>
       )}

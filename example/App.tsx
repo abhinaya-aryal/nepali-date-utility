@@ -108,9 +108,9 @@ function App() {
               </label>
               <NepaliDatePicker
                 value={getTodayBS()}
-                inputClassName="text-red-500 bg-purple-50 border-2 border-indigo-500 focus:outline-none focus:ring-1 ring-indigo-500"
-                calendarClassName="text-blue-500 border-2 border-red-500"
-                dayClassName="text-blue-500"
+                inputClassName="text-red-500 bg-gray-300 border-2 border-indigo-500 focus:outline-none focus:ring-1 ring-indigo-500"
+                calendarClassName="text-red-600 border-4 border-red-600"
+                dayClassName="text-blue-500 bg-gray-300"
                 selectedDayClassName="bg-red-500 text-white hover:bg-red-500"
                 todayClassName="border-red-500 border-2"
                 placeholder="Custom Input Style"
