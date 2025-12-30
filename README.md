@@ -14,6 +14,11 @@ A beautiful and customizable React date picker component along with other utilit
 - 📱 Responsive and accessible design
 - 🧠 Simple and powerful API
 
+<!-- prettier-ignore -->
+> [!IMPORTANT]
+> This library uses Tailwind CSS.
+> Ensure Tailwind is installed and configured in your project.
+
 ## 📦 Installation
 
 ```bash
