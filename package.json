@@ -1,6 +1,6 @@
 {
   "name": "nepali-date-utility",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "A beautiful React date picker component with other date utilities for Nepali Bikram Sambat calendar",
   "type": "module",
   "main": "dist/index.js",
