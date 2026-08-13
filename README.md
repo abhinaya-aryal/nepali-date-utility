@@ -1,31 +1,33 @@
-# 🌸 Nepali DatePicker
+# Nepali DatePicker
 
 A beautiful and customizable React date picker component along with other utilities for the Nepali Bikram Sambat calendar system.
 
-> ✨ [Live Demo »](https://date.aryalabhinaya.com.np)
+> [Live Demo »](https://date.aryalabhinaya.com.np)
 
-## ✨ Features
+## Features
 
-- 🌿 Modern, clean UI with Tailwind CSS
-- 📅 Full support for the Bikram Sambat calendar
-- 🔁 Seamless BS ↔ AD conversion utilities
-- 🌐 Localization (English + Nepali)
-- 🎨 Highly customizable theming
-- 📱 Responsive and accessible design
-- 🧠 Simple and powerful API
+- Modern, clean UI with Tailwind CSS
+- Full support for the Bikram Sambat calendar
+- Seamless BS ↔ AD conversion utilities
+- Localization (English + Nepali)
+- Highly customizable theming
+- Responsive and accessible design
+- Simple and powerful API
 
 <!-- prettier-ignore -->
 > [!IMPORTANT]
 > This library uses Tailwind CSS.
 > Ensure Tailwind is installed and configured in your project.
 
-## 📦 Installation
+## Installation
 
 ```bash
+bun add nepali-date-utility
+# or
 npm install nepali-date-utility
 ```
 
-## 🚀 Usage
+## Usage
 
 In `tailwind.config.js`, add `"./node_modules/nepali-date-utlity/**/*.{js,ts,jsx,tsx}"`
 
@@ -85,7 +87,7 @@ function App() {
 export default App;
 ```
 
-## 🧾 API Reference
+## API Reference
 
 ### NepaliDatePicker Props
 
@@ -107,7 +109,7 @@ export default App;
 | `disabledDayClassName` | `string`                      | -                          | Override class name for the disabled day in calendar popup      |
 | `position`             | `"bottom" \| "top" \| "auto"` | `"bottom"`                 | Position of the calendar popup                                  |
 
-### 🧱 Type Definitions
+### Type Definitions
 
 ```typescript
 interface CustomDate {
@@ -123,7 +125,7 @@ interface CustomDateFormatOptions {
 }
 ```
 
-### 🔧 Utility Functions
+### Utility Functions
 
 - `convertADToBS(adDate: Date): CustomDate` - Convert AD date to BS date
 - `convertBSToAD(bsDate: CustomDate): CustomDate` - Convert BS date to AD date
@@ -132,7 +134,7 @@ interface CustomDateFormatOptions {
 - `parseDate(dateStr: string, format?: string): CustomDate | null` - Parse string to `CustomDate` format
 - `isValidBsDate(date: NepaliDate): boolean` - Check if BS date is valid
 
-## 🎨 Customization Examples
+## Customization Examples
 
 You can customize the appearance using Tailwind classes:
 
@@ -170,12 +172,12 @@ You can customize the appearance using Tailwind classes:
 />
 ```
 
-## 🌐 Demo
+## Demo
 
-> 📍 **Live Preview**: [https://date.aryalabhinaya.com.np](https://date.aryalabhinaya.com.np)
+> **Live Preview**: [https://date.aryalabhinaya.com.np](https://date.aryalabhinaya.com.np)
 
 Explore the component’s features interactively.
 
-## 📄 License
+## License
 
 [MIT](./LICENSE)

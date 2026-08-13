@@ -101,7 +101,7 @@ export function parseDate(
 
     // Failed to parse
     return null;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

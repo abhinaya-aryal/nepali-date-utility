@@ -53,7 +53,7 @@ export function convertBSToAD(bsDate: CustomDate): CustomDate {
   let bsYear = bsEpoch.year;
   let bsMonth = bsEpoch.month;
   let bsDay = bsEpoch.day;
-  let adDate = new Date(adEpoch);
+  const adDate = new Date(adEpoch);
 
   while (
     bsYear !== bsDate.year ||
@@ -127,7 +127,7 @@ export function isValidBsDate(date: CustomDate): boolean {
     if (day < 1 || day > daysInMonth) return false;
 
     return true;
-  } catch (error) {
+  } catch {
     return false;
   }
 }

@@ -61,7 +61,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     const totalCells = Math.ceil((daysInMonth + firstDayOfMonth) / 7) * 7;
 
     // Generate calendar grid
-    let cells = [];
+    const cells = [];
     for (let i = 0; i < totalCells; i++) {
       const dayOfMonth = i - firstDayOfMonth + 1;
       const isCurrentMonth = dayOfMonth > 0 && dayOfMonth <= daysInMonth;

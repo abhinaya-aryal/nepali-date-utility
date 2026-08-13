@@ -25,3 +25,4 @@ example/dist
 *.sln
 *.sw?
 .env
+.npmrc

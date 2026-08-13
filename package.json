@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "nepali-date-utility",
   "version": "1.6.0",
   "description": "A beautiful React date picker component with other date utilities for Nepali Bikram Sambat calendar",
@@ -20,7 +21,8 @@
     "dev": "cd example && vite",
     "test": "vitest run",
     "test:watch": "vitest",
-    "prepare": "npm run build"
+    "lint": "eslint .",
+    "prepare": "bun run build"
   },
   "keywords": [
     "nepali",
@@ -50,13 +52,18 @@
     "react": ">=17.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^8.57.1",
     "@types/react": "^18.2.0",
     "@vitejs/plugin-react": "^4.2.0",
     "eslint": "^8.56.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
     "react": "^18.2.0",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.1",
     "typescript": "^5.3.0",
+    "typescript-eslint": "^8.18.0",
     "vitest": "^1.2.1"
   }
 }
