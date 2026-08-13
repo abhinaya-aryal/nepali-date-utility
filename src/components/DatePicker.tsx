@@ -1,4 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  autoUpdate,
+  autoPlacement,
+  flip,
+  offset,
+  shift,
+  useDismiss,
+  useFloating,
+  useInteractions,
+  FloatingPortal,
+} from "@floating-ui/react";
 import { DatePickerProps, CustomDate } from "../types";
 import { getTodayBS, isValidBsDate } from "../utils/converter";
 import { parseDate } from "../utils/formatter";
@@ -28,7 +39,6 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   const [selectedDate, setSelectedDate] = useState<CustomDate | null>(
     value || null,
   );
-  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (value) {
@@ -37,21 +47,33 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     }
   }, [value]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
+  const isAuto = position === "auto";
+  const placement = position === "top" ? "top-start" : "bottom-start";
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const middleware = isAuto
+    ? [
+        offset(4),
+        autoPlacement({ alignment: "start" }),
+        shift({ padding: 8 }),
+      ]
+    : [
+        offset(4),
+        // Only auto-flip the default "bottom" placement; respect explicit "top"
+        ...(position === "top" ? [] : [flip()]),
+        shift({ padding: 8 }),
+      ];
+
+  const { refs, floatingStyles, context, placement: finalPlacement } =
+    useFloating({
+      open: isOpen,
+      onOpenChange: setIsOpen,
+      placement,
+      middleware,
+      whileElementsMounted: autoUpdate,
+    });
+
+  const dismiss = useDismiss(context);
+  const { getFloatingProps } = useInteractions([dismiss]);
 
   const handleDateSelect = (date: CustomDate) => {
     setSelectedDate(date);
@@ -81,18 +103,11 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     }
   };
 
-  const getCalendarPosition = () => {
-    switch (position) {
-      case "top":
-        return "bottom-full mb-1";
-      case "bottom":
-      default:
-        return "top-full mt-1";
-    }
-  };
-
   return (
-    <div ref={containerRef} className={`relative inline-block ${className}`}>
+    <div
+      ref={refs.setReference}
+      className={`relative inline-block ${className}`}
+    >
       <div className="relative">
         <DateInput
           value={selectedDate}
@@ -129,24 +144,30 @@ export const DatePicker: React.FC<DatePickerProps> = ({
       </div>
 
       {isOpen && (
-        <div
-          className={`absolute z-10 w-72 bg-white rounded-md shadow-lg ${getCalendarPosition()}`}
-        >
-          <Calendar
-            selectedDate={selectedDate}
-            viewDate={viewDate}
-            onDateSelect={handleDateSelect}
-            onViewDateChange={setViewDate}
-            minDate={minDate}
-            maxDate={maxDate}
-            locale={formatOptions.locale}
-            calendarClassName={calendarClassName}
-            dayClassName={dayClassName}
-            selectedDayClassName={selectedDayClassName}
-            todayClassName={todayClassName}
-            disabledDayClassName={disabledDayClassName}
-          />
-        </div>
+        <FloatingPortal>
+          <div
+            ref={refs.setFloating}
+            style={{ ...floatingStyles, zIndex: 9999 }}
+            data-placement={finalPlacement}
+            className="w-72 bg-white rounded-md shadow-lg"
+            {...getFloatingProps()}
+          >
+            <Calendar
+              selectedDate={selectedDate}
+              viewDate={viewDate}
+              onDateSelect={handleDateSelect}
+              onViewDateChange={setViewDate}
+              minDate={minDate}
+              maxDate={maxDate}
+              locale={formatOptions.locale}
+              calendarClassName={calendarClassName}
+              dayClassName={dayClassName}
+              selectedDayClassName={selectedDayClassName}
+              todayClassName={todayClassName}
+              disabledDayClassName={disabledDayClassName}
+            />
+          </div>
+        </FloatingPortal>
       )}
     </div>
   );
