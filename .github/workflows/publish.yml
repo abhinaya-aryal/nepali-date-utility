@@ -27,7 +27,7 @@ jobs:
 
       - name: Get version from package.json
         id: version
-        run: echo "version=$(node -p \"require('./package.json').version\")" >> "$GITHUB_OUTPUT"
+        run: echo "version=$(bun -e 'console.log(JSON.parse(await Bun.file(`package.json`).text()).version)')" >> "$GITHUB_OUTPUT"
 
       - name: Configure npm auth
         run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
