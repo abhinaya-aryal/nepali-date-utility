@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "nepali-date-utility",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "A beautiful React date picker component with other date utilities for Nepali Bikram Sambat calendar",
   "type": "module",
   "main": "dist/index.js",
