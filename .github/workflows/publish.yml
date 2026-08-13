@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   publish:
@@ -29,13 +30,8 @@ jobs:
         id: version
         run: echo "version=$(bun -e 'console.log(JSON.parse(await Bun.file(`package.json`).text()).version)')" >> "$GITHUB_OUTPUT"
 
-      - name: Configure npm auth
-        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Publish to npm
-        run: bun publish --access public
+      - name: Publish to npm (OIDC trusted publishing)
+        run: npm publish --provenance --access public
 
       - name: Create git tag
         run: |
