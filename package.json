@@ -1,16 +1,28 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "nepali-date-utility",
-  "version": "1.7.1",
-  "description": "A beautiful React date picker component with other date utilities for Nepali Bikram Sambat calendar",
+  "version": "2.0.0",
+  "description": "Zero-dependency Nepali Bikram Sambat (BS) date library with accessible React DatePicker components",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.js",
+      "require": "./dist/core/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs"
     }
   },
   "files": [
@@ -21,7 +33,10 @@
     "dev": "cd example && vite",
     "test": "vitest run",
     "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
+    "add-year": "bun scripts/manage-calendar-year.ts add",
+    "remove-year": "bun scripts/manage-calendar-year.ts remove",
     "prepare": "bun run build"
   },
   "keywords": [
@@ -46,30 +61,37 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@floating-ui/react": "^0.27.20",
-    "tailwind-merge": "^3.3.1"
+    "@floating-ui/react": "^0.27.20"
   },
   "peerDependencies": {
-    "react": ">=17.0.0"
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@eslint/js": "^8.57.1",
-    "@testing-library/jest-dom": "^7.0.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.4",
-    "@types/react": "^18.2.0",
-    "@vitejs/plugin-react": "^4.2.0",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
-    "globals": "^15.14.0",
-    "jsdom": "^30.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.3.1",
-    "ts-node": "^10.9.2",
-    "tsup": "^8.0.1",
-    "typescript": "^5.3.0",
-    "typescript-eslint": "^8.18.0",
-    "vitest": "^1.2.1"
+    "@eslint/js": "^10.0.1",
+    "@testing-library/jest-dom": "^8.0.0",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.13",
+    "@types/react": "^19.3.3",
+    "@vitejs/plugin-react": "^6.3.0",
+    "eslint": "^10.15.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.8",
+    "globals": "^17.14.0",
+    "jsdom": "^31.0.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsup": "^9.0.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.74.0",
+    "vitest": "^5.1.2"
   }
 }

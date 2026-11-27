@@ -6,8 +6,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/index.ts",
-      name: "Nepali Date Utility",
-      formats: ["es"],
+      name: "NepaliDateUtility",
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
       external: ["react", "react-dom"],
